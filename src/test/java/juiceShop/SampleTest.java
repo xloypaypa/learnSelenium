@@ -10,6 +10,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +32,11 @@ public class SampleTest {
 
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("disable-gpu");
+        driver = new ChromeDriver(chromeOptions);
         driver.get(baseUrl);
         // not fullscreen. because on the server. nobody knows the screen size. (or at least we should not rely on it)
         driver.manage().window().setSize(new Dimension(1920, 1080));
